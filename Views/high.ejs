@@ -1,0 +1,134 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel = "stylesheet" href = "app.css">
+<!--NAVBAR-->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Video Game Reader</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Game Information</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+<!--split into two rows with bootstrap-->
+
+
+<!--second division-->
+
+<div class = "container push">
+  <div class = "row">
+    <div class = "col-md-12 content " style="background-color:#696070;">
+  <form method="POST" action = "/high">
+<select name="title">
+  <option value="Fire Emblem">Fire Emblem</option>
+  <option value="Kingdom Hearts">Kingdom Hearts</option>
+  <option value="Halo 3">Halo 3</option>
+</select>
+<button class = "button" >Submit</button>
+</form>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+    <div class="container-fluid push2">
+      <div class="row">
+        <div class="col-sm-6" style="background-color:#696070;">
+    <div  id="chartContainer" style="height: 150px; width: 50%;"></div>
+        </div>
+
+        <div class="col-sm-6" style="background-color:#696070;">
+        <!--need to find out way to display the databases on this page-->
+        <h1>The highest level reached in <strong><%=title%></strong> was  <strong> <%=num_of_levels%></strong> and the score was <strong><%=highscore%></strong></h1>
+        </div>
+
+    </div>
+    </div>
+
+<!--Scripts-->
+<script src="high.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}
+
+</script>
+
+<!--GRAPH-->
+<script>
+window.onload = function () {
+
+var dps = []; // dataPoints
+var chart = new CanvasJS.Chart("chartContainer", {
+	title :{
+		text: "graph for use later"
+	},
+	axisY: {
+		includeZero: false
+	},
+	data: [{
+		type: "line",
+		dataPoints: dps
+	}]
+});
+
+var xVal = 0;
+var yVal = 100;
+var updateInterval = 1000;
+var dataLength = 20; // number of dataPoints visible at any point
+
+var updateChart = function (count) {
+
+	count = count || 1;
+
+	for (var j = 0; j < count; j++) {
+		yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+		dps.push({
+			x: xVal,
+			y: yVal
+		});
+		xVal++;
+	}
+
+	if (dps.length > dataLength) {
+		dps.shift();
+	}
+
+	chart.render();
+};
+
+updateChart(dataLength);
+setInterval(function(){updateChart()}, updateInterval);
+
+}
+</script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
