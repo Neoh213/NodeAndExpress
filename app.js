@@ -23,7 +23,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'DJ',
   database : 'practice',
-  password : 'Neoheartless1'   //your root user's password
+  password : ''   //your root user's password
 });
 
 //home page and shows the count of the stores on the command terminal
