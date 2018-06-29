@@ -6,7 +6,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'DJ',
   database : 'practice',
-  password : 'Neoheartless1'   //your root user's password
+  password : ''   //your root user's password
 });
 
 //makes test data to put into tables
